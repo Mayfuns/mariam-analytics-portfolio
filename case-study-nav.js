@@ -65,6 +65,60 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 
+  const dashboard=document.querySelector('.preview-panel .dashboard');
+  const dashboardImage=dashboard?.querySelector('img');
+  if(dashboard&&dashboardImage){
+    dashboard.classList.add('zoomable-dashboard');
+    dashboard.setAttribute('role','button');
+    dashboard.setAttribute('tabindex','0');
+    dashboard.setAttribute('aria-label','View project preview full size');
+
+    const hint=document.createElement('span');
+    hint.className='dashboard-zoom-hint';
+    hint.textContent='View full size ↗';
+    dashboard.appendChild(hint);
+
+    const lightbox=document.createElement('div');
+    lightbox.className='dashboard-lightbox';
+    lightbox.setAttribute('role','dialog');
+    lightbox.setAttribute('aria-modal','true');
+    lightbox.setAttribute('aria-label','Full-size project preview');
+    const caption=dashboard.querySelector('.caption')?.textContent?.trim()||dashboardImage.alt||'Project preview';
+    lightbox.innerHTML=`<div class="dashboard-lightbox-inner"><img src="${dashboardImage.src}" alt="${dashboardImage.alt||'Project preview'}"><button class="dashboard-lightbox-close" type="button" aria-label="Close full-size preview">×</button><div class="dashboard-lightbox-label"></div></div>`;
+    lightbox.querySelector('.dashboard-lightbox-label').textContent=caption;
+    document.body.appendChild(lightbox);
+
+    const closeButton=lightbox.querySelector('.dashboard-lightbox-close');
+    let previousFocus=null;
+    const openLightbox=()=>{
+      previousFocus=document.activeElement;
+      lightbox.classList.add('open');
+      document.body.classList.add('lightbox-open');
+      closeButton.focus();
+    };
+    const closeLightbox=()=>{
+      if(!lightbox.classList.contains('open'))return;
+      lightbox.classList.remove('open');
+      document.body.classList.remove('lightbox-open');
+      if(previousFocus&&typeof previousFocus.focus==='function')previousFocus.focus();
+    };
+
+    dashboard.addEventListener('click',openLightbox);
+    dashboard.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        openLightbox();
+      }
+    });
+    closeButton.addEventListener('click',closeLightbox);
+    lightbox.addEventListener('click',e=>{
+      if(e.target===lightbox)closeLightbox();
+    });
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox();
+    });
+  }
+
   const cases=[
     ['vitalcare.html','VitalCare Health Group'],
     ['talent-pulse.html','Talent Pulse Solutions'],
