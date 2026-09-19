@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
 
   const cases=[
+    ['adhcri.html','ADHCRI Health Intelligence Dashboard'],
     ['vitalcare.html','VitalCare Health Group'],
     ['talent-pulse.html','Talent Pulse Solutions'],
     ['global-hiv.html','Global HIV Analytics'],
