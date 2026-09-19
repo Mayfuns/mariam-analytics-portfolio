@@ -30,10 +30,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   document.querySelectorAll('.actions .btn[href="index.html#work"]').forEach(a=>a.textContent='Back to portfolio');
   document.querySelectorAll('.side-links .btn[href="index.html#work"]').forEach(a=>a.textContent='View other projects');
-  document.querySelectorAll('.repo-status').forEach(el=>{
-    if(el.tagName!=='A' || !el.getAttribute('href')) el.textContent='GitHub repository — coming soon';
-  });
-
   const stack=document.querySelector('.stack');
   if(stack){
     let panels=[...stack.children].filter(el=>el.classList&&el.classList.contains('panel'));
