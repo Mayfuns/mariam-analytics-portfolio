@@ -30,7 +30,9 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   document.querySelectorAll('.actions .btn[href="index.html#work"]').forEach(a=>a.textContent='Back to portfolio');
   document.querySelectorAll('.side-links .btn[href="index.html#work"]').forEach(a=>a.textContent='View other projects');
-  document.querySelectorAll('.repo-status').forEach(el=>el.textContent='GitHub repository — coming soon');
+  document.querySelectorAll('.repo-status').forEach(el=>{
+    if(el.tagName!=='A' || !el.getAttribute('href')) el.textContent='GitHub repository — coming soon';
+  });
 
   const stack=document.querySelector('.stack');
   if(stack){
@@ -65,30 +67,44 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 
-  const dashboard=document.querySelector('.preview-panel .dashboard');
-  const dashboardImage=dashboard?.querySelector('img');
-  if(dashboard&&dashboardImage){
+  document.querySelectorAll('.preview-panel .dashboard').forEach(dashboard=>{
+    const dashboardImage=dashboard.querySelector('img');
+    if(!dashboardImage)return;
     dashboard.classList.add('zoomable-dashboard');
     dashboard.setAttribute('role','button');
     dashboard.setAttribute('tabindex','0');
-    dashboard.setAttribute('aria-label','View project preview full size');
+    dashboard.setAttribute('aria-label','View '+(dashboardImage.alt||'dashboard')+' full size');
 
-    const hint=document.createElement('span');
-    hint.className='dashboard-zoom-hint';
-    hint.textContent='View full size ↗';
-    dashboard.appendChild(hint);
+    if(!dashboard.querySelector('.dashboard-zoom-hint')){
+      const hint=document.createElement('span');
+      hint.className='dashboard-zoom-hint';
+      hint.textContent='View full size ↗';
+      dashboard.appendChild(hint);
+    }
 
     const lightbox=document.createElement('div');
     lightbox.className='dashboard-lightbox';
     lightbox.setAttribute('role','dialog');
     lightbox.setAttribute('aria-modal','true');
-    lightbox.setAttribute('aria-label','Full-size project preview');
-    const caption=dashboard.querySelector('.caption')?.textContent?.trim()||dashboardImage.alt||'Project preview';
-    lightbox.innerHTML=`<div class="dashboard-lightbox-inner"><img src="${dashboardImage.src}" alt="${dashboardImage.alt||'Project preview'}"><button class="dashboard-lightbox-close" type="button" aria-label="Close full-size preview">×</button><div class="dashboard-lightbox-label"></div></div>`;
-    lightbox.querySelector('.dashboard-lightbox-label').textContent=caption;
+    lightbox.setAttribute('aria-label','Full-size dashboard preview');
+    const caption=dashboard.querySelector('.caption')?.textContent?.trim()||dashboardImage.alt||'Dashboard preview';
+    const inner=document.createElement('div');
+    inner.className='dashboard-lightbox-inner';
+    const lbImg=document.createElement('img');
+    lbImg.src=dashboardImage.src;
+    lbImg.alt=dashboardImage.alt||'Dashboard preview';
+    const closeButton=document.createElement('button');
+    closeButton.className='dashboard-lightbox-close';
+    closeButton.type='button';
+    closeButton.setAttribute('aria-label','Close full-size preview');
+    closeButton.textContent='×';
+    const label=document.createElement('div');
+    label.className='dashboard-lightbox-label';
+    label.textContent=caption;
+    inner.append(lbImg,closeButton,label);
+    lightbox.appendChild(inner);
     document.body.appendChild(lightbox);
 
-    const closeButton=lightbox.querySelector('.dashboard-lightbox-close');
     let previousFocus=null;
     const openLightbox=()=>{
       previousFocus=document.activeElement;
@@ -110,14 +126,17 @@ document.addEventListener('DOMContentLoaded',()=>{
         openLightbox();
       }
     });
-    closeButton.addEventListener('click',closeLightbox);
+    closeButton.addEventListener('click',e=>{
+      e.stopPropagation();
+      closeLightbox();
+    });
     lightbox.addEventListener('click',e=>{
       if(e.target===lightbox)closeLightbox();
     });
     document.addEventListener('keydown',e=>{
       if(e.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox();
     });
-  }
+  });
 
   const cases=[
     ['vitalcare.html','VitalCare Health Group'],
