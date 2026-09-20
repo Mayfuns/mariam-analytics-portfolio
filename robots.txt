@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mayfuns.github.io/mariam-analytics-portfolio/sitemap.xml
