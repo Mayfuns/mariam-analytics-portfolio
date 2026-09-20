@@ -1,0 +1,4 @@
+retention_priority,customers,churners,churn_rate,avg_customer_value
+High,549,311,56.6,74
+Medium,522,146,28,137.1
+Low,2079,38,1.8,659.6
