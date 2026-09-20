@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620">
+  <rect width="1100" height="620" rx="28" fill="#f8fafc"/>
+  <text x="60" y="58" font-family="Arial" font-size="34" font-weight="700" fill="#07111f">Complaint behaviour is the clearest churn signal</text>
+  <text x="60" y="92" font-family="Arial" font-size="19" fill="#607389">Customers who complained churned at 83.0% versus 10.1% without complaints.</text>
+  <text x="252" y="173" text-anchor="end" font-family="Arial" font-size="22" fill="#0f2e4f">Complaint</text><rect x="270" y="148" width="730" height="34" rx="8" fill="#e8eef5"/><rect x="270" y="148" width="605.9" height="34" rx="8" fill="#d35f62"/><text x="887.9" y="173" font-family="Arial" font-size="20" font-weight="700" fill="#173b63">83.0%</text><text x="252" y="378" text-anchor="end" font-family="Arial" font-size="22" fill="#0f2e4f">No complaint</text><rect x="270" y="353" width="730" height="34" rx="8" fill="#e8eef5"/><rect x="270" y="353" width="73.7" height="34" rx="8" fill="#d35f62"/><text x="355.73" y="378" font-family="Arial" font-size="20" font-weight="700" fill="#173b63">10.1%</text>
+  <text x="270" y="592" font-family="Arial" font-size="17" fill="#718197">Churn rate</text>
+  </svg>
