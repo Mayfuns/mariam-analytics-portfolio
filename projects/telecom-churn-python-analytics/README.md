@@ -112,3 +112,7 @@ jupyter notebook
 ```
 
 Open `01_notebook/telecom_churn_analysis.ipynb` and run the cells from top to bottom.
+
+## Portfolio case study
+
+View the full case study: https://mayfuns.github.io/mariam-analytics-portfolio/telecom-churn.html
