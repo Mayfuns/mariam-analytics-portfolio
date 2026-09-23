@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     ['adhcri.html','ADHCRI Health Intelligence Dashboard'],
     ['vitalcare.html','VitalCare Health Group'],
     ['talent-pulse.html','Talent Pulse Solutions'],
+    ['telecom-churn.html','Telecom Customer Churn & Retention Intelligence'],
     ['vitalink.html','VitalLink Telehealth Solutions'],
     ['global-hiv.html','Global HIV Analytics'],
     ['lumina.html','Lumina'],
